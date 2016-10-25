@@ -1,0 +1,41 @@
+﻿<Window x:Class="TennisCountTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TennisCountTest"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:c="clr-namespace:TraceGenerator.MainControler.CustomControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
+    <Grid Background="Green">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Canvas Grid.Row="1" Margin="5" >
+            <!--场地-->
+            <Path Data="{Binding Court.StadiumOutLook}" 
+                  Stroke="{Binding Court.LineBrush}"
+                  StrokeThickness="{Binding Court.LineStrokeThinckness}"/>
+            <ItemsControl ItemsSource="{Binding Tracks}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <Ellipse  Width="5" Height="5" Fill="White" Canvas.Left="{Binding Person.X}" Canvas.Right="{Binding Person.Y}"/>
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding ChangeViewSizeCmd}"  CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Canvas,Mode=FindAncestor}}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Canvas>
+        <StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Window>
